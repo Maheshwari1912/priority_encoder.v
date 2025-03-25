@@ -1,0 +1,35 @@
+module tb_priority_encoder_4to2;
+    logic [3:0] D;
+    logic [1:0] Y;
+
+    // Instantiate the Priority Encoder
+    priority_encoder_4to2 UUT (.D(D), .Y(Y));
+
+    initial begin
+        $display("Test Start");
+
+        // Test Case 1: Only D0 is active
+        D = 4'b0001; #10;
+        $display("Input: %b, Output: %b", D, Y);
+
+        // Test Case 2: D1 has higher priority
+        D = 4'b0011; #10;
+        $display("Input: %b, Output: %b", D, Y);
+
+        // Test Case 3: D2 has higher priority
+        D = 4'b0111; #10;
+        $display("Input: %b, Output: %b", D, Y);
+
+        // Test Case 4: D3 has highest priority
+        D = 4'b1111; #10;
+        $display("Input: %b, Output: %b", D, Y);
+
+        // Test Case 5: No valid input
+        D = 4'b0000; #10;
+        $display("Input: %b, Output: %b", D, Y);
+
+        $display("Test Completed");
+        $finish;
+    end
+endmodule
+
